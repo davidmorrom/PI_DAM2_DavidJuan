@@ -26,10 +26,6 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    RecyclerView miRecyclerView;
-    LinearLayoutManager miLayoutManager;
-    MiAdaptador miAdapter;
-    Datos datos;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -65,23 +61,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        miRecyclerView = view.findViewById(R.id.recyclerView);
-        miRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager miLayoutManager = new LinearLayoutManager(getContext());
-        miRecyclerView.setLayoutManager(miLayoutManager);
-        datos = new Datos();
-        miAdapter = new MiAdaptador(datos.getLista());
-        miAdapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String msg = "Seleccionada la opción " +
-                        miRecyclerView.getChildAdapterPosition(v);
-            }
-        });
-        miRecyclerView.setAdapter(miAdapter);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }
