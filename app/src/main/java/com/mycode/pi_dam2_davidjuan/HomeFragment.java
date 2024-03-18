@@ -12,14 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -92,7 +90,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         // Especificar un adaptador
-        MiAdaptador adaptador = new MiAdaptador(lista);
+        MiAdaptador adaptador = new MiAdaptador(lista, this.getContext());
         recyclerView.setAdapter(adaptador);
 
         // Configurar el manejador de clics si es necesario
@@ -100,10 +98,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int pos = recyclerView.getChildAdapterPosition(v);
-                Toast.makeText(getContext(), "Seleccionado elemento en posición: " + pos, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Me gusta!", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     public static void getDatos() {
         lista = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -114,20 +113,22 @@ public class HomeFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                int i = 0;
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String nombreCuenta = postSnapshot.child("nombreCuenta").getValue(String.class);
                     String pieDeFoto = postSnapshot.child("pieDeFoto").getValue(String.class);
                     String pieDeFotoC = nombreCuenta + ": " + pieDeFoto;
                     String rutaRelativaFoto = postSnapshot.child("rutaRelativaFoto").getValue(String.class);
 
                     // Cargar imagen
-                    StorageReference storageRef = storage.getReference();
-                    StorageReference pathReference = storageRef.child("accesodatosdam.appspot.com/c1.jpg");
-                    String url = pathReference.getDownloadUrl().toString();
+//                    StorageReference storageRef = storage.getReference();
+//                    StorageReference pathReference = storageRef.child("accesodatosdam.appspot.com/c1.jpg");
+//                    String url = pathReference.getDownloadUrl().toString();
 
-                    lista.add(new ItemLista(url, nombreCuenta, pieDeFotoC));
+                    lista.add(new ItemLista(rutaRelativaFoto, nombreCuenta, pieDeFotoC));
                 }
             }
+
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -135,10 +136,13 @@ public class HomeFragment extends Fragment {
                 System.out.println("Failed to read value." + error.toException());
             }
         });
+
     }
 
 
     public ArrayList<ItemLista> getLista() {
         return lista;
     }
+
+
 }

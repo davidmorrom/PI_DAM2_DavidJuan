@@ -1,11 +1,13 @@
 package com.mycode.pi_dam2_davidjuan;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.MiViewHolder> implements View.OnClickListener {
     private ArrayList<ItemLista> datos;
     private View.OnClickListener listener;
+    private static Context context;
+
 
     public static class MiViewHolder extends RecyclerView.ViewHolder {
         private ImageView imagen;
@@ -29,16 +33,19 @@ public class MiAdaptador extends RecyclerView.Adapter<MiAdaptador.MiViewHolder> 
         }
 
         public void bindListaItem(ItemLista li) {
-            Glide.with(imagen.getContext())
-                    .load(li.getImagen())
-                    .into(imagen);
+//            Glide.with(imagen.getContext())
+//                    .load(li.getImagen())
+//                    .into(imagen);
+            imagen.setImageResource(R.drawable.c8);
             textoNombre.setText(li.getTextoNombre());
             textoPie.setText(li.getTextoPie());
         }
+
     }
 
-    public MiAdaptador(ArrayList<ItemLista> datos) {
+    public MiAdaptador(ArrayList<ItemLista> datos, Context cOntext) {
         this.datos = datos;
+        this.context = context;
     }
 
     @Override
