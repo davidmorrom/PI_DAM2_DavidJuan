@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +23,15 @@ public class Login extends AppCompatActivity {
     private TextView txtRegister;
     private FirebaseAuth mAuth;
     private int failedAttempts;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        imageView = findViewById(R.id.instagramLogo);
+        imageView.setImageResource(R.drawable.instagram);
         mAuth = FirebaseAuth.getInstance();
         failedAttempts = 0;
 

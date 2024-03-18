@@ -9,19 +9,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private Fragment homeFragment;
     private Fragment settingsFragment;
     private Fragment activeFragment;
     private FragmentManager fragmentManager;
+    private static ArrayList<ItemLista> lista;
+    private static String nombre;
+    private static String contrasena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         homeFragment = new HomeFragment();
         settingsFragment = new SettingsFragment();
+
+        nombre = getIntent().getStringExtra("email");
+        contrasena = getIntent().getStringExtra("password");
 
         fragmentManager = getSupportFragmentManager();
         activeFragment = homeFragment;
@@ -60,5 +67,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static String getNombre() {
+        return nombre;
+    }
+
+    public static String getContrasena() {
+        return contrasena;
     }
 }

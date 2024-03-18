@@ -82,8 +82,8 @@ public class SettingsFragment extends Fragment {
         Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
 
         // Ejemplo de cómo usar estos elementos
-        tvNombre.setText("Nombre de usuario");
-        tvContrasena.setText("Contraseña de usuario");
+        tvNombre.setText(MainActivity.getNombre());
+        tvContrasena.setText(MainActivity.getContrasena());
         swCuentaPrivada.setChecked(true);
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ public class Register extends AppCompatActivity {
     private EditText edtTxtContrasena;
     private EditText edtTxtConfirmarContrasena;
     private TextView txtLogin;
+    private ImageView imageView;
     private FirebaseAuth mAuth;
 
     @Override
@@ -27,6 +29,9 @@ public class Register extends AppCompatActivity {
         edtTxtContrasena = findViewById(R.id.edtTxtContrasena);
         edtTxtConfirmarContrasena = findViewById(R.id.edtTxtConfirmarContrasena);
         txtLogin = findViewById(R.id.txtLogin);
+
+        imageView = findViewById(R.id.instagramLogo);
+        imageView.setImageResource(R.drawable.instagram);
 
         findViewById(R.id.btnRegister).setOnClickListener(new View.OnClickListener() {
             @Override
